@@ -1,0 +1,81 @@
+{{!-- <div class="max-w-4xl mx-auto">
+        <h1 class="text-2xl font-bold mb-6">Danh sách đặt sân</h1>
+        <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+            <thead class="bg-gray-200 text-gray-700">
+                <tr>
+                    <th class="py-2 px-4">Người đặt</th>
+                    <th class="py-2 px-4">Số điện thoại</th>
+                    <th class="py-2 px-4">Ngày</th>
+                    <th class="py-2 px-4">Thời gian</th>
+                    <th class="py-2 px-4">Trạng thái</th>
+                    <th class="py-2 px-4">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each bookings}}
+                    <tr>
+                        <td class="py-2 px-4">{{ user }}</td>
+                        <td class="py-2 px-4">{{ phone }}</td>
+                        <td class="py-2 px-4">{{ formatDate date }}</td>
+                        <td class="py-2 px-4">{{ time }}</td>
+                        <td class="py-2 px-4">{{ status }}</td>
+                        <td class="py-2 px-4">
+                            {{#if (eq status 'pending')}}
+                                <form action="/admin/adminBooking/{{ _id }}/update-status" method="POST">
+                                    <select name="status" class="border border-gray-300 rounded-md py-1 px-2 focus:outline-none focus:ring focus:border-blue-300">
+                                        <option value="accepted">Chấp nhận</option>
+                                        <option value="rejected">Từ chối</option>
+                                    </select>
+                                    <button type="submit" class="ml-2 bg-blue-500 text-white py-1 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">Cập nhật</button>
+                                </form>
+                            {{/if}}
+                        </td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div> --}}
+     <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-4">Quản Lý Đặt Sân</h1>
+        {{#if bookings.length}}
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+                    <thead class="bg-gray-200">
+                        <tr>
+                            <th class="py-2 px-4 text-left">Sân</th>
+                            <th class="py-2 px-4 text-left">Người Đặt</th>
+                            <th class="py-2 px-4 text-left">Số Điện Thoại</th>
+                            <th class="py-2 px-4 text-left">Ngày</th>
+                            <th class="py-2 px-4 text-left">Giờ</th>
+                            <th class="py-2 px-4 text-left">Trạng Thái</th>
+                            <th class="py-2 px-4 text-left">Hành Động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each bookings}}
+                            <tr class="border-b">
+                                <td class="py-2 px-4">{{this.pitch}}</td>
+                                <td class="py-2 px-4">{{this.user}}</td>
+                                <td class="py-2 px-4">{{this.phone}}</td>
+                                <td class="py-2 px-4">{{this.date}}</td>
+                                <td class="py-2 px-4">{{this.time}}</td>
+                                <td class="py-2 px-4">{{this.status}}</td>
+                                <td class="py-2 px-4">
+                                     <form action="/Booking/adminBooking/{{this._id}}/status" method="POST" class="inline">
+                                         <select name="status" class="border border-gray-300 rounded px-2 py-1">
+                                        <option value="pending" {{#eq this.status 'pending'}}selected{{/eq}}>Chờ Xử Lý</option>
+                                        <option value="accepted" {{#eq this.status 'accepted'}}selected{{/eq}}>Đã Chấp Nhận</option>
+                                        <option value="rejected" {{#eq this.status 'rejected'}}selected{{/eq}}>Đã Từ Chối</option>
+                                    </select>
+                                    <button type="submit" class="bg-blue-500 text-white px-3 py-1 rounded ml-2">Cập Nhật</button>
+                                </form>
+                                </td>
+                            </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        {{else}}
+            <p class="text-red-500">Không có đơn đặt nào.</p>
+        {{/if}}
+    </div>

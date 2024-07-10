@@ -1,0 +1,35 @@
+<div class="w-full max-w-md">
+        <h2 class="text-3xl font-bold text-center mb-6">Update sân bóng</h2>
+        <form method="post" action="/pitch/{{pitch._id}}" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+            <div class="mb-4">
+                <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
+                <input type="text" value="{{pitch.name}}" id="name" name="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+            <div class="mb-4">
+                <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Mô tả</label>
+                <textarea  id="describe" name="describe" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">{{pitch.describe}}</textarea>
+            </div>
+            <div class="mb-4">
+                <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Hình ảnh</label>
+                <input type="text" value="{{pitch.image}}" id="image" name="image" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+            <div class="flex items-center justify-between">
+                <button type="submit" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Cập nhật</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const success_msg = '{{success_msg}}';
+            if (success_msg) {
+                Toastify({
+                    text: success_msg,
+                    duration: 3000,
+                    close: true,
+                    gravity: "top",
+                    position: "center",
+                    backgroundColor: "#4CAF50",
+                }).showToast();
+            }
+        });
+    </script>
